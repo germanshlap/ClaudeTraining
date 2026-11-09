@@ -20,12 +20,13 @@ There is no test runner configured, so there are no tests to run.
 
 ## Architecture
 
-Vite + React 19, no routing, no external state management, nothing persisted (state resets on reload). `src/main.jsx` mounts `App`; all app logic lives in a single component, `src/App.jsx`:
+Vite + React 19, no routing, no external state management, nothing persisted (state resets on reload). `src/main.jsx` mounts `App`. Components live flat in `src/`, and `App` is the only owner of shared state:
 
-- `transactions` state holds seed data as plain objects `{ id, description, amount, type, category, date }`, where `type` is `"income"` or `"expense"`.
-- Total income, total expenses and balance are derived from `transactions` on every render.
-- Form field state (`description`, `amount`, `type`, `category`) and filter state (`filterType`, `filterCategory`) all live in `App` too.
-- The `categories` array is shared by the add-form dropdown and the category filter.
+- `App.jsx` holds the `transactions` state (seed data as plain objects `{ id, description, amount, type, category, date }`, where `type` is `"income"` or `"expense"`) and the module-level `categories` array. It passes data down as props and adds transactions via an `onAdd` callback.
+- `Summary.jsx` derives total income, total expenses and balance from `transactions` on every render.
+- `TransactionForm.jsx` owns its own form field state and calls `onAdd(transaction)` on submit.
+- `TransactionList.jsx` owns the type/category filter state and renders the filtered table.
+- `categories` is shared by the form's category dropdown and the list's category filter.
 
 **Known bugs (intentional, part of the course):**
 - `amount` is a string — in the seed data and in new transactions (taken straight from the input) — so the totals' `reduce` concatenates strings instead of adding numbers. Fix by converting to a number when creating a transaction and/or at calculation time (the seed data is strings too).
