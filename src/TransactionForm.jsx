@@ -13,7 +13,7 @@ function TransactionForm({ categories, onAdd }) {
     onAdd({
       id: Date.now(),
       description,
-      amount,
+      amount: parseFloat(amount),
       type,
       category,
       date: new Date().toISOString().split('T')[0],
@@ -21,7 +21,7 @@ function TransactionForm({ categories, onAdd }) {
 
     setDescription("");
     setAmount("");
-    setType("expense");
+setType("expense");
     setCategory("food");
   };
 
