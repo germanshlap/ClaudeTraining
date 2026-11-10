@@ -16,12 +16,12 @@ function TransactionList({ transactions, categories, onDelete }) {
     <div className="transactions">
       <h2>Transactions</h2>
       <div className="filters">
-        <select value={filterType} onChange={(e) => setFilterType(e.target.value)}>
+        <select aria-label="Filter by type" value={filterType} onChange={(e) => setFilterType(e.target.value)}>
           <option value="all">All Types</option>
           <option value="income">Income</option>
           <option value="expense">Expense</option>
         </select>
-        <select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)}>
+        <select aria-label="Filter by category" value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)}>
           <option value="all">All Categories</option>
           {categories.map(cat => (
             <option key={cat} value={cat}>{cat}</option>
@@ -63,6 +63,11 @@ function TransactionList({ transactions, categories, onDelete }) {
               </td>
             </tr>
           ))}
+          {filteredTransactions.length === 0 && (
+            <tr>
+              <td colSpan={5} className="empty">No transactions match these filters. Change a filter or add a transaction below.</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

@@ -1,131 +1,118 @@
 .app {
-  max-width: 800px;
+  max-width: 1040px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 32px 20px 64px;
+}
+
+.masthead {
+  margin-bottom: 24px;
 }
 
 h1 {
-  margin-bottom: 4px;
+  font-family: var(--slab);
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
 }
 
 .subtitle {
-  margin-bottom: 20px;
-  color: #666;
+  color: var(--ink-soft);
 }
 
+h2 {
+  font-family: var(--slab);
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+/* Summary: balance is the headline figure, income and expenses sit beside it */
 .summary {
   display: flex;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-
-.summary-card {
-  flex: 1;
-  border: 1px solid #ddd;
-  padding: 14px;
-  background: #fff;
-}
-
-.summary-card h3 {
-  font-size: 13px;
-  color: #888;
-  margin-bottom: 4px;
-}
-
-.income-amount {
-  color: green;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.expense-amount {
-  color: red;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.balance-amount {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.spending-chart {
-  border: 1px solid #ddd;
-  padding: 16px;
-  margin-bottom: 24px;
-  background: #fff;
-}
-
-.spending-chart h2 {
-  font-size: 16px;
-  margin-bottom: 12px;
-}
-
-.add-transaction {
-  border: 1px solid #ddd;
-  padding: 16px;
-  margin-bottom: 24px;
-  background: #fff;
-}
-
-.add-transaction h2 {
-  font-size: 16px;
-  margin-bottom: 12px;
-}
-
-form {
-  display: flex;
-  gap: 8px;
+  align-items: flex-end;
   flex-wrap: wrap;
+  gap: 16px 48px;
+  padding-bottom: 20px;
+  margin-bottom: 28px;
+  border-bottom: 3px double var(--ink);
 }
 
-form input,
-form select {
-  padding: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+.summary-balance {
+  flex: 1 1 320px;
 }
 
-form input[type="text"] {
-  flex: 2;
+.summary h3 {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
 }
 
-form input[type="number"] {
-  flex: 1;
+.income-amount,
+.expense-amount,
+.balance-amount {
+  font-family: var(--slab);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-weight: 600;
+  font-size: 1.125rem;
 }
 
-form select {
-  flex: 1;
+.income-amount { color: var(--income); }
+.expense-amount { color: var(--expense); }
+.balance-amount { color: var(--ink); }
+
+.summary .balance-amount {
+  font-size: clamp(3rem, 9vw, 5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
 }
 
-form button {
-  padding: 8px 20px;
-  background: #333;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
+.summary .income-amount,
+.summary .expense-amount {
+  font-size: 1.75rem;
 }
 
-.transactions {
-  margin-bottom: 24px;
+/* Layout */
+.ledger-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 40px;
+  align-items: start;
 }
 
+.ledger {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--expense);
+  padding: 20px 24px 24px;
+}
+
+.side {
+  position: sticky;
+  top: 24px;
+}
+
+/* Transactions */
 .transactions h2 {
-  font-size: 16px;
   margin-bottom: 12px;
 }
 
 .filters {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 12px;
 }
 
-.filters select {
-  padding: 6px;
-  border: 1px solid #ccc;
-  font-size: 13px;
+select,
+input {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 7px 10px;
 }
 
 table {
@@ -133,28 +120,125 @@ table {
   border-collapse: collapse;
 }
 
-thead {
-  background: #f5f5f5;
-}
-
-th, td {
-  padding: 10px;
+th,
+td {
+  padding: 9px 8px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
-  font-size: 14px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.95rem;
+  vertical-align: baseline;
 }
 
 th {
-  font-size: 12px;
-  color: #888;
-  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  border-bottom: 2px solid var(--ink);
 }
 
-.delete-btn {
-  padding: 4px 10px;
-  background: #eee;
-  border: 1px solid #ccc;
+td:first-child {
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  text-align: right;
+}
+
+.transactions td .income-amount,
+.transactions td .expense-amount,
+td.income-amount,
+td.expense-amount {
+  font-size: 1rem;
+}
+
+.empty {
+  color: var(--ink-soft);
+  padding: 20px 8px;
+}
+
+td button {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  padding: 3px 10px;
+  color: var(--expense);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
   cursor: pointer;
-  font-size: 12px;
-  color: #333;
+}
+
+td button:hover {
+  border-color: var(--expense);
+}
+
+/* Add row: the last line of the book */
+.add-transaction {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 3px double var(--ink);
+}
+
+.add-transaction h2 {
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+form input[type="text"] { flex: 2 1 180px; }
+form input[type="number"] { flex: 1 1 90px; font-variant-numeric: tabular-nums; }
+form select { flex: 1 1 110px; }
+
+form button {
+  flex: 0 0 auto;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 8px 18px;
+  background: var(--ink);
+  color: var(--sheet);
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: #2d3b52;
+}
+
+/* Chart */
+.spending-chart h2 {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.spending-chart p {
+  color: var(--ink-soft);
+}
+
+@media (max-width: 860px) {
+  .ledger-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .side {
+    position: static;
+  }
+
+  .ledger {
+    padding: 16px;
+  }
+
+  /* hide category column on narrow screens to keep amounts readable */
+  th:nth-child(3),
+  td:nth-child(3) {
+    display: none;
+  }
 }

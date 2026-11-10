@@ -10,7 +10,11 @@ function Summary({ transactions }) {
   const balance = totalIncome - totalExpenses;
 
   return (
-    <div className="summary">
+    <section className="summary" aria-label="Summary">
+      <div className="summary-balance">
+        <h3>Balance</h3>
+        <p className="balance-amount">${balance}</p>
+      </div>
       <div className="summary-card">
         <h3>Income</h3>
         <p className="income-amount">${totalIncome}</p>
@@ -19,11 +23,7 @@ function Summary({ transactions }) {
         <h3>Expenses</h3>
         <p className="expense-amount">${totalExpenses}</p>
       </div>
-      <div className="summary-card">
-        <h3>Balance</h3>
-        <p className="balance-amount">${balance}</p>
-      </div>
-    </div>
+    </section>
   );
 }
 

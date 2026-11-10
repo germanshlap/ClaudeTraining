@@ -14,16 +14,16 @@ function SpendingChart({ transactions }) {
 
   return (
     <div className="spending-chart">
-      <h2>Spending by Category</h2>
+      <h2>Spending by category</h2>
       {data.length === 0 ? (
-        <p>No expenses yet.</p>
+        <p>No expenses yet. Add one to see where your money goes.</p>
       ) : (
         <ResponsiveContainer width="100%" height={data.length * 44 + 40}>
           <BarChart data={data} layout="vertical" margin={{ top: 0, right: 16, bottom: 0, left: 0 }}>
-            <XAxis type="number" tickFormatter={v => `$${v}`} />
-            <YAxis type="category" dataKey="category" width={100} />
-            <Tooltip formatter={v => `$${v.toFixed(2)}`} cursor={{ fill: 'rgba(0,0,0,0.05)' }} />
-            <Bar dataKey="total" name="Spent" fill="#3b6ea5" radius={[0, 4, 4, 0]} barSize={20} />
+            <XAxis type="number" tickFormatter={v => `$${v}`} stroke="#a9bcd0" tick={{ fill: '#4d5a6e', fontSize: 12 }} />
+            <YAxis type="category" dataKey="category" width={96} stroke="#a9bcd0" tick={{ fill: '#1b2433', fontSize: 13 }} />
+            <Tooltip formatter={v => `$${v.toFixed(2)}`} cursor={{ fill: 'rgba(27,36,51,0.06)' }} />
+            <Bar dataKey="total" name="Spent" fill="#b3261e" barSize={16} />
           </BarChart>
         </ResponsiveContainer>
       )}

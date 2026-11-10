@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;800&family=Source+Sans+3:wght@400;600&display=swap');
+
+:root {
+  --paper: #e4e8e1;
+  --sheet: #eef1ea;
+  --ink: #1b2433;
+  --ink-soft: #4d5a6e;
+  --rule: #a9bcd0;
+  --income: #14665c;
+  --expense: #b3261e;
+  --focus: #1b4fa0;
+  --slab: 'Bitter', Georgia, serif;
+  --sans: 'Source Sans 3', system-ui, sans-serif;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,7 +20,14 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #ffffff;
-  color: #333;
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: var(--paper);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
 }
